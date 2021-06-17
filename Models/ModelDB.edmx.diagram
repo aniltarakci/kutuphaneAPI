@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9dc44e3e05de41ffae53c31368cc58b8" Name="Diagram1">
+        <EntityTypeShape EntityType="KUTUPHANEModel.Calisanlar" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KUTUPHANEModel.Firmalar" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KUTUPHANEModel.Kategoriler" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KUTUPHANEModel.KitapKiralama" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="KUTUPHANEModel.Siparis" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="KUTUPHANEModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KUTUPHANEModel.TeslimAlindi" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KUTUPHANEModel.Urunler" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="KUTUPHANEModel.Uyeler" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <AssociationConnector Association="KUTUPHANEModel.FK_KITAP_KIRALAMA_CALISANLAR" ManuallyRouted="false" />
+        <AssociationConnector Association="KUTUPHANEModel.FK_URUNLER_FIRMALAR" ManuallyRouted="false" />
+        <AssociationConnector Association="KUTUPHANEModel.FK_URUNLER_KATEGORILER" ManuallyRouted="false" />
+        <AssociationConnector Association="KUTUPHANEModel.FK_KITAP_KIRALAMA_MUSTERILER" ManuallyRouted="false" />
+        <AssociationConnector Association="KUTUPHANEModel.FK_KITAP_KIRALAMA_URUNLER" ManuallyRouted="false" />
+        <AssociationConnector Association="KUTUPHANEModel.FK_TESLIM_ONAY_KITAP_KIRALAMA" ManuallyRouted="false" />
+        <AssociationConnector Association="KUTUPHANEModel.FK_SIPARIS_URUNLER" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

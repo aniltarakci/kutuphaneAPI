@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KUTUPHANEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Calisanlar">
+    <Key>
+      <PropertyRef Name="Calisan_id" />
+    </Key>
+    <Property Name="Calisan_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Soyad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Tel_no" Type="Int32" />
+    <Property Name="Adres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="KitapKiralama" Relationship="Self.FK_KITAP_KIRALAMA_CALISANLAR" FromRole="Calisanlar" ToRole="KitapKiralama" />
+  </EntityType>
+  <EntityType Name="Firmalar">
+    <Key>
+      <PropertyRef Name="Firma_id" />
+    </Key>
+    <Property Name="Firma_id" Type="Int32" Nullable="false" />
+    <Property Name="Firma_adi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Tel" Type="Int32" />
+    <Property Name="Fax" Type="Int32" />
+    <Property Name="Eposta_adresi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Urunler" Relationship="Self.FK_URUNLER_FIRMALAR" FromRole="Firmalar" ToRole="Urunler" />
+  </EntityType>
+  <EntityType Name="Kategoriler">
+    <Key>
+      <PropertyRef Name="Kategori_id" />
+    </Key>
+    <Property Name="Kategori_id" Type="Int32" Nullable="false" />
+    <Property Name="Kategori_Adi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Urunler" Relationship="Self.FK_URUNLER_KATEGORILER" FromRole="Kategoriler" ToRole="Urunler" />
+  </EntityType>
+  <EntityType Name="KitapKiralama">
+    <Key>
+      <PropertyRef Name="Musteri_id" />
+    </Key>
+    <Property Name="Calisan_id" Type="Int32" />
+    <Property Name="Musteri_id" Type="Int32" Nullable="false" />
+    <Property Name="Urun_id" Type="Int32" />
+    <Property Name="Kiralama_tarihi" Type="DateTime" Precision="0" />
+    <Property Name="TeslimAlma_tarihi" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Calisanlar" Relationship="Self.FK_KITAP_KIRALAMA_CALISANLAR" FromRole="KitapKiralama" ToRole="Calisanlar" />
+    <NavigationProperty Name="Uyeler" Relationship="Self.FK_KITAP_KIRALAMA_MUSTERILER" FromRole="KitapKiralama" ToRole="Uyeler" />
+    <NavigationProperty Name="Urunler" Relationship="Self.FK_KITAP_KIRALAMA_URUNLER" FromRole="KitapKiralama" ToRole="Urunler" />
+    <NavigationProperty Name="TeslimAlindi" Relationship="Self.FK_TESLIM_ONAY_KITAP_KIRALAMA" FromRole="KitapKiralama" ToRole="TeslimAlindi" />
+  </EntityType>
+  <EntityType Name="Siparis">
+    <Key>
+      <PropertyRef Name="Siparis_id" />
+    </Key>
+    <Property Name="Siparis_id" Type="Int32" Nullable="false" />
+    <Property Name="Urun_id" Type="Int32" />
+    <Property Name="Adet" Type="Int32" />
+    <NavigationProperty Name="Urunler" Relationship="Self.FK_SIPARIS_URUNLER" FromRole="Siparis" ToRole="Urunler" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TeslimAlindi">
+    <Key>
+      <PropertyRef Name="Musteri_id" />
+    </Key>
+    <Property Name="Musteri_id" Type="Int32" Nullable="false" />
+    <Property Name="Urun_id" Type="Int32" />
+    <Property Name="Teslim_Alindi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="KitapKiralama" Relationship="Self.FK_TESLIM_ONAY_KITAP_KIRALAMA" FromRole="TeslimAlindi" ToRole="KitapKiralama" />
+  </EntityType>
+  <EntityType Name="Urunler">
+    <Key>
+      <PropertyRef Name="Urun_id" />
+    </Key>
+    <Property Name="Urun_id" Type="Int32" Nullable="false" />
+    <Property Name="Urun_adi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Kategori_id" Type="Int32" />
+    <Property Name="Firma_id" Type="Int32" />
+    <Property Name="Alis_fiyat" Type="Int32" />
+    <NavigationProperty Name="Firmalar" Relationship="Self.FK_URUNLER_FIRMALAR" FromRole="Urunler" ToRole="Firmalar" />
+    <NavigationProperty Name="Kategoriler" Relationship="Self.FK_URUNLER_KATEGORILER" FromRole="Urunler" ToRole="Kategoriler" />
+    <NavigationProperty Name="KitapKiralama" Relationship="Self.FK_KITAP_KIRALAMA_URUNLER" FromRole="Urunler" ToRole="KitapKiralama" />
+    <NavigationProperty Name="Siparis" Relationship="Self.FK_SIPARIS_URUNLER" FromRole="Urunler" ToRole="Siparis" />
+  </EntityType>
+  <EntityType Name="Uyeler">
+    <Key>
+      <PropertyRef Name="Musteri_id" />
+    </Key>
+    <Property Name="Musteri_id" Type="Int32" Nullable="false" />
+    <Property Name="Ad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Soyad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Tel_no" Type="Int32" />
+    <Property Name="Eposta_adresi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Adres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="KitapKiralama" Relationship="Self.FK_KITAP_KIRALAMA_MUSTERILER" FromRole="Uyeler" ToRole="KitapKiralama" />
+  </EntityType>
+  <Association Name="FK_KITAP_KIRALAMA_CALISANLAR">
+    <End Role="Calisanlar" Type="Self.Calisanlar" Multiplicity="0..1" />
+    <End Role="KitapKiralama" Type="Self.KitapKiralama" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calisanlar">
+        <PropertyRef Name="Calisan_id" />
+      </Principal>
+      <Dependent Role="KitapKiralama">
+        <PropertyRef Name="Calisan_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_URUNLER_FIRMALAR">
+    <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="0..1" />
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Firmalar">
+        <PropertyRef Name="Firma_id" />
+      </Principal>
+      <Dependent Role="Urunler">
+        <PropertyRef Name="Firma_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_URUNLER_KATEGORILER">
+    <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="0..1" />
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategoriler">
+        <PropertyRef Name="Kategori_id" />
+      </Principal>
+      <Dependent Role="Urunler">
+        <PropertyRef Name="Kategori_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KITAP_KIRALAMA_MUSTERILER">
+    <End Role="Uyeler" Type="Self.Uyeler" Multiplicity="1" />
+    <End Role="KitapKiralama" Type="Self.KitapKiralama" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Uyeler">
+        <PropertyRef Name="Musteri_id" />
+      </Principal>
+      <Dependent Role="KitapKiralama">
+        <PropertyRef Name="Musteri_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KITAP_KIRALAMA_URUNLER">
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
+    <End Role="KitapKiralama" Type="Self.KitapKiralama" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urunler">
+        <PropertyRef Name="Urun_id" />
+      </Principal>
+      <Dependent Role="KitapKiralama">
+        <PropertyRef Name="Urun_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TESLIM_ONAY_KITAP_KIRALAMA">
+    <End Role="KitapKiralama" Type="Self.KitapKiralama" Multiplicity="1" />
+    <End Role="TeslimAlindi" Type="Self.TeslimAlindi" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="KitapKiralama">
+        <PropertyRef Name="Musteri_id" />
+      </Principal>
+      <Dependent Role="TeslimAlindi">
+        <PropertyRef Name="Musteri_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SIPARIS_URUNLER">
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
+    <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urunler">
+        <PropertyRef Name="Urun_id" />
+      </Principal>
+      <Dependent Role="Siparis">
+        <PropertyRef Name="Urun_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="KUTUPHANEEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Calisanlar" EntityType="Self.Calisanlar" />
+    <EntitySet Name="Firmalar" EntityType="Self.Firmalar" />
+    <EntitySet Name="Kategoriler" EntityType="Self.Kategoriler" />
+    <EntitySet Name="KitapKiralama" EntityType="Self.KitapKiralama" />
+    <EntitySet Name="Siparis" EntityType="Self.Siparis" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="TeslimAlindi" EntityType="Self.TeslimAlindi" />
+    <EntitySet Name="Urunler" EntityType="Self.Urunler" />
+    <EntitySet Name="Uyeler" EntityType="Self.Uyeler" />
+    <AssociationSet Name="FK_KITAP_KIRALAMA_CALISANLAR" Association="Self.FK_KITAP_KIRALAMA_CALISANLAR">
+      <End Role="Calisanlar" EntitySet="Calisanlar" />
+      <End Role="KitapKiralama" EntitySet="KitapKiralama" />
+    </AssociationSet>
+    <AssociationSet Name="FK_URUNLER_FIRMALAR" Association="Self.FK_URUNLER_FIRMALAR">
+      <End Role="Firmalar" EntitySet="Firmalar" />
+      <End Role="Urunler" EntitySet="Urunler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_URUNLER_KATEGORILER" Association="Self.FK_URUNLER_KATEGORILER">
+      <End Role="Kategoriler" EntitySet="Kategoriler" />
+      <End Role="Urunler" EntitySet="Urunler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KITAP_KIRALAMA_MUSTERILER" Association="Self.FK_KITAP_KIRALAMA_MUSTERILER">
+      <End Role="Uyeler" EntitySet="Uyeler" />
+      <End Role="KitapKiralama" EntitySet="KitapKiralama" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KITAP_KIRALAMA_URUNLER" Association="Self.FK_KITAP_KIRALAMA_URUNLER">
+      <End Role="Urunler" EntitySet="Urunler" />
+      <End Role="KitapKiralama" EntitySet="KitapKiralama" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TESLIM_ONAY_KITAP_KIRALAMA" Association="Self.FK_TESLIM_ONAY_KITAP_KIRALAMA">
+      <End Role="KitapKiralama" EntitySet="KitapKiralama" />
+      <End Role="TeslimAlindi" EntitySet="TeslimAlindi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SIPARIS_URUNLER" Association="Self.FK_SIPARIS_URUNLER">
+      <End Role="Urunler" EntitySet="Urunler" />
+      <End Role="Siparis" EntitySet="Siparis" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
